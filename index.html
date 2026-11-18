@@ -17,6 +17,9 @@
                             redHover: '#B91C1C',
                             wine: '#6F0D19',
                             wineHover: '#85101E',
+                            blue: '#1E40AF',
+                            blueHover: '#1E3A8A',
+                            blueLight: '#3B82F6',
                             dark: '#0B0B0B',
                             cardDark: '#161616',
                             cardBorder: '#282828',
@@ -84,23 +87,13 @@
 <body class="antialiased selection:bg-brand-red selection:text-white flex flex-col min-h-full pb-safe-nav md:pb-0">
 
     <!-- TOP HEADER -->
-    <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-md border-b border-brand-cardBorder">
+    <header class="sticky top-0 z-40 bg-[#2A2A2A] backdrop-blur-md border-b border-[#444444]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-20">
                 
                 <!-- BRAND LOGO -->
-                <button onclick="showSection('inicio')" class="flex items-center gap-3 text-left">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-brand-red rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand-red/30">
-                        <i data-lucide="truck" class="w-6 h-6"></i>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-heading font-black text-lg sm:text-xl tracking-wider text-white uppercase leading-none">
-                            SAN JORGE
-                        </span>
-                        <span class="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-brand-red uppercase mt-1">
-                            Transportadora
-                        </span>
-                    </div>
+                <button onclick="showSection('inicio')" class="flex items-center">
+                    <img src="LOGO.png" alt="Logo Transportadora San Jorge" class="w-40 h-40 sm:w-48 sm:h-48 object-contain">
                 </button>
 
                 <!-- DESKTOP NAVIGATION LINKS -->
@@ -108,20 +101,33 @@
                     <button onclick="showSection('inicio')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="inicio">
                         <i data-lucide="home" class="w-4 h-4"></i> Inicio
                     </button>
-                    <button onclick="showSection('historia')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="historia">
-                        <i data-lucide="book-open" class="w-4 h-4"></i> Historia
-                    </button>
-                    <button onclick="showSection('elegirnos')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="elegirnos">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i> ¿Por Qué Elegirnos?
-                    </button>
-                    <button onclick="showSection('camiones')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="camiones">
-                        <i data-lucide="truck" class="w-4 h-4"></i> Camiones
-                    </button>
-                    <button onclick="showSection('rutas')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="rutas">
-                        <i data-lucide="map-pin" class="w-4 h-4"></i> Rutas
-                    </button>
+                    
+                    <!-- NOSOTROS DROPDOWN -->
+                    <div class="relative" id="nosotrosDropdown">
+                        <button onclick="toggleNosotrosDropdown()" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="nosotros">
+                            <i data-lucide="building" class="w-4 h-4"></i> Nosotros
+                            <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform" id="nosotrosArrow"></i>
+                        </button>
+                        <div class="absolute left-0 top-full mt-2 w-56 bg-brand-cardDark border border-brand-cardBorder rounded-2xl shadow-2xl opacity-0 invisible transform translate-y-2 transition-all duration-200 z-50" id="nosotrosMenu">
+                            <div class="p-2 space-y-1">
+                                <button onclick="showSection('historia'); closeNosotrosDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-brand-red/10 transition flex items-center gap-2 text-xs">
+                                    <i data-lucide="book-open" class="w-4 h-4 text-brand-red"></i> Nuestra Historia
+                                </button>
+                                <button onclick="showSection('elegirnos'); closeNosotrosDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-brand-blue/10 transition flex items-center gap-2 text-xs">
+                                    <i data-lucide="shield-check" class="w-4 h-4 text-brand-blue"></i> Por Qué Elegirnos
+                                </button>
+                                <button onclick="showSection('camiones'); closeNosotrosDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-brand-red/10 transition flex items-center gap-2 text-xs">
+                                    <i data-lucide="truck" class="w-4 h-4 text-brand-red"></i> Nuestros Camiones
+                                </button>
+                                <button onclick="showSection('rutas'); closeNosotrosDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-gray-300 hover:text-white hover:bg-brand-blue/10 transition flex items-center gap-2 text-xs">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-blue"></i> Rutas y Cobertura
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <button onclick="showSection('retiros')" class="nav-btn px-3 py-2 rounded-lg text-brand-red font-semibold hover:bg-brand-red/10 transition flex items-center gap-1.5" data-sec="retiros">
-                        <i data-lucide="package-check" class="w-4 h-4"></i> Retiro Domicilio
+                        <i data-lucide="package-check" class="w-4 h-4"></i> Retiro
                     </button>
                     <button onclick="showSection('contacto')" class="nav-btn px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-brand-cardDark transition flex items-center gap-1.5" data-sec="contacto">
                         <i data-lucide="phone" class="w-4 h-4"></i> Contacto
@@ -173,8 +179,8 @@
                                     <i data-lucide="truck" class="w-4 h-4"></i>
                                     <span>Solicitar Retiro a Domicilio</span>
                                 </button>
-                                <button onclick="showSection('rutas')" class="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder text-white font-semibold text-sm transition flex items-center justify-center gap-2">
-                                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-red"></i>
+                                <button onclick="showSection('rutas')" class="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-semibold text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-brand-blue/30">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
                                     <span>Ver Rutas y Horarios</span>
                                 </button>
                             </div>
@@ -191,51 +197,147 @@
                 </div>
             </div>
 
-            <!-- BOTONES DE ACCESO RÁPIDO -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Servicios Destacados</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                    <button onclick="showSection('retiros')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="package-check" class="w-5 h-5"></i>
+            <!-- ESTADÍSTICAS CLAVE -->
+            <div class="bg-brand-dark/50 border-b border-brand-cardBorder py-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div class="p-4">
+                            <div class="text-3xl sm:text-4xl font-black text-brand-red mb-1">15+</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Años de Experiencia</div>
                         </div>
-                        <span class="font-bold text-white text-xs">Retiro Domicilio</span>
-                    </button>
+                        <div class="p-4">
+                            <div class="text-3xl sm:text-4xl font-black text-brand-blue mb-1">500+</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Envíos Mensuales</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-3xl sm:text-4xl font-black text-brand-red mb-1">98%</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Entregas a Tiempo</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-3xl sm:text-4xl font-black text-brand-blue mb-1">3</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Sucursales Propias</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <button onclick="showSection('historia')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="book-open" class="w-5 h-5"></i>
-                        </div>
-                        <span class="font-bold text-white text-xs">Nuestra Historia</span>
-                    </button>
+            <!-- SERVICIOS DESTACADOS CON MÁS DETALLE -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs font-bold text-brand-red uppercase tracking-widest">Qué Ofrecemos</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-1">Servicios Logísticos Integrales</h2>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2">Soluciones completas para tu carga: desde el retiro en tu puerta hasta la entrega final.</p>
+                </div>
 
-                    <button onclick="showSection('elegirnos')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Servicio 1: Retiro Domicilio -->
+                    <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-red/50 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                            <i data-lucide="package-check" class="w-7 h-7"></i>
                         </div>
-                        <span class="font-bold text-white text-xs">¿Por Qué Elegirnos?</span>
-                    </button>
+                        <h3 class="font-bold text-white text-lg mb-2">Retiro de Encomienda a Domicilio</h3>
+                        <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+                            Nuestro camión urbano propio pasa a retirar tus bultos en Yacuiba y Santa Cruz. Olvídate de fletes y traslados: nosotros vamos a tu puerta.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-5">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Retiro en 24-48 hrs</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Embalaje asesorado</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Seguimiento GPS</li>
+                        </ul>
+                        <button onclick="showSection('retiros')" class="w-full py-2.5 px-4 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red font-semibold text-xs hover:bg-brand-red/20 transition flex items-center justify-center gap-1.5">
+                            <span>Solicitar Retiro</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
 
-                    <button onclick="showSection('camiones')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="truck" class="w-5 h-5"></i>
+                    <!-- Servicio 2: Carga Pesada -->
+                    <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-blue/50 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
                         </div>
-                        <span class="font-bold text-white text-xs">Camiones</span>
-                    </button>
+                        <h3 class="font-bold text-white text-lg mb-2">Transporte de Carga Pesada</h3>
+                        <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+                            Camiones y furgones herméticos de hasta 30 toneladas para carga industrial, maquinaria, contenedores y mercadería voluminosa en la Ruta 9.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-5">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Hasta 30 toneladas</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Precinto hermético</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Monitoreo satelital</li>
+                        </ul>
+                        <button onclick="showSection('camiones')" class="w-full py-2.5 px-4 rounded-xl bg-brand-blue/10 border border-brand-blue/30 text-brand-blue font-semibold text-xs hover:bg-brand-blue/20 transition flex items-center justify-center gap-1.5">
+                            <span>Ver Nuestros Camiones</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
 
-                    <button onclick="showSection('rutas')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="navigation" class="w-5 h-5"></i>
+                    <!-- Servicio 3: Rutas Diarias -->
+                    <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-red/50 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                            <i data-lucide="navigation" class="w-7 h-7"></i>
                         </div>
-                        <span class="font-bold text-white text-xs">Rutas Diarias</span>
-                    </button>
+                        <h3 class="font-bold text-white text-lg mb-2">Rutas Diarias Yacuiba ⇄ Santa Cruz</h3>
+                        <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+                            Salidas frecuentes cubriendo Villamontes y Camiri. Conductores expertos en la Ruta 9 garantizando puntualidad y seguridad en cada viaje.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-5">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Salidas diarias</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Paradas intermedias</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Entrega puerta a puerta</li>
+                        </ul>
+                        <button onclick="showSection('rutas')" class="w-full py-2.5 px-4 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red font-semibold text-xs hover:bg-brand-red/20 transition flex items-center justify-center gap-1.5">
+                            <span>Ver Rutas y Horarios</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                    <button onclick="showSection('contacto')" class="p-4 bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder rounded-2xl flex flex-col items-center text-center group transition">
-                        <div class="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <i data-lucide="phone-call" class="w-5 h-5"></i>
+            <!-- POR QUÉ ELEGIRNOS - PREVIEW -->
+            <div class="bg-brand-cardDark/50 border-y border-brand-cardBorder py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <span class="text-xs font-bold text-brand-red uppercase tracking-widest">Garantía San Jorge</span>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-1">Por Qué Somos Tu Mejor Opción</h2>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-2">Más de 15 años conectando el Gran Chaco con Santa Cruz con compromiso y profesionalismo.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Seguridad Total</h4>
+                            <p class="text-[11px] text-gray-400">Furgones sellados y precintados contra polvo, lluvia y manipulación.</p>
                         </div>
-                        <span class="font-bold text-white text-xs">Contacto</span>
-                    </button>
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Puntualidad</h4>
+                            <p class="text-[11px] text-gray-400">Itinerarios estrictos y salidas diarias para entregas a tiempo.</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="user-check" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Atención Directa</h4>
+                            <p class="text-[11px] text-gray-400">WhatsApp empresarial y personal capacitado 24/7.</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Precios Justos</h4>
+                            <p class="text-[11px] text-gray-400">Tarifas por peso/volumen real sin cargos ocultos ni sorpresas.</p>
+                        </div>
+                    </div>
+
+<div class="text-center mt-8">
+                        <button onclick="showSection('elegirnos')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-cardDark hover:bg-brand-surface border border-brand-cardBorder text-white font-semibold text-sm transition">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <span>Ver Todas las Razones</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -284,7 +386,7 @@
                             <span class="text-[10px] font-bold text-brand-red uppercase tracking-wider">Expansión</span>
                             <h4 class="font-bold text-white text-sm mt-1">Inversión en Camiones Propios</h4>
                         </div>
-                        <p class="text-xs text-gray-400 mt-2">Incorporación de trailers de alto tonelaje para transporte pesados e interdepartamental.</p>
+                        <p class="text-xs text-gray-400 mt-2">Incorporación de camiones de alto tonelaje para transporte pesado e interdepartamental.</p>
                     </div>
                 </div>
 
@@ -336,7 +438,7 @@
                 </div>
 
                 <div class="bg-brand-cardDark border border-brand-cardBorder p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mb-4">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
                     <h3 class="font-bold text-white text-base mb-2">Seguridad y Precinto Hermético</h3>
@@ -356,7 +458,7 @@
                 </div>
 
                 <div class="bg-brand-cardDark border border-brand-cardBorder p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mb-4">
                         <i data-lucide="map-pin" class="w-6 h-6"></i>
                     </div>
                     <h3 class="font-bold text-white text-base mb-2">Dominio Total de la Ruta 9</h3>
@@ -376,7 +478,7 @@
                 </div>
 
                 <div class="bg-brand-cardDark border border-brand-cardBorder p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 text-brand-red flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/15 border border-brand-blue/30 text-brand-blue flex items-center justify-center mb-4">
                         <i data-lucide="dollar-sign" class="w-6 h-6"></i>
                     </div>
                     <h3 class="font-bold text-white text-base mb-2">Tarifas Competitivas y Fair Play</h3>
@@ -411,16 +513,16 @@
                     </div>
                 </div>
 
-                <div class="bg-brand-cardDark rounded-2xl border border-brand-red/60 overflow-hidden shadow-lg shadow-brand-red/10">
+                <div class="bg-brand-cardDark rounded-2xl border border-brand-blue/60 overflow-hidden shadow-lg shadow-brand-blue/10">
                     <div class="relative h-48">
                         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Camión Urbano" class="w-full h-full object-cover">
-                        <span class="absolute top-3 left-3 bg-green-600 text-white text-[10px] font-bold px-2.5 py-1 rounded">Retiro Domicilio</span>
+                        <span class="absolute top-3 left-3 bg-brand-blue text-white text-[10px] font-bold px-2.5 py-1 rounded">Retiro Domicilio</span>
                     </div>
                     <div class="p-5">
                         <h3 class="text-lg font-bold text-white mb-1">Camión Urbano de Recolección</h3>
                         <p class="text-xs text-gray-400 mb-4">Camión propio adaptado para retirar encomiendas en la ciudad.</p>
                         <div class="space-y-2 border-t border-brand-cardBorder pt-3 text-xs">
-                            <div class="flex justify-between text-gray-400"><span>Servicio:</span> <strong class="text-brand-red">Puerta a Puerta</strong></div>
+                            <div class="flex justify-between text-gray-400"><span>Servicio:</span> <strong class="text-brand-blue">Puerta a Puerta</strong></div>
                             <div class="flex justify-between text-gray-400"><span>Capacidad:</span> <strong class="text-white">5 a 8 Toneladas</strong></div>
                         </div>
                     </div>
@@ -447,30 +549,267 @@
         <section id="sec-rutas" class="app-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div class="text-center max-w-3xl mx-auto mb-10">
                 <span class="text-xs font-bold text-brand-red uppercase tracking-widest">Conexión Interprovincial</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Rutas Diarias y Paradas</h2>
-                <p class="text-xs sm:text-sm text-gray-400 mt-2">Salidas frecuentes uniendo Tarija y Santa Cruz a través de la Ruta 9.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Rutas, Horarios y Cobertura</h2>
+                <p class="text-xs sm:text-sm text-gray-400 mt-2">Operamos salidas diarias conectando el Gran Chaco con Santa Cruz a través de la Ruta 9. Detalle completo de paradas, frecuencias y tiempos de tránsito.</p>
             </div>
 
-            <div class="bg-brand-cardDark border border-brand-cardBorder rounded-3xl p-6 sm:p-10 mb-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="p-4 bg-brand-dark rounded-2xl border border-brand-cardBorder">
-                        <i data-lucide="map-pin" class="w-8 h-8 text-brand-red mx-auto mb-2"></i>
-                        <h3 class="font-black text-lg text-white">YACUIBA</h3>
-                        <p class="text-xs text-gray-400 mt-1">Origen / Recepción & Retiros Urbanos</p>
+            <!-- RUTA PRINCIPAL: YACUIBA ⇄ SANTA CRUZ -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-brand-red/20 border border-brand-red/30 flex items-center justify-center">
+                        <i data-lucide="navigation" class="w-5 h-5 text-brand-red"></i>
                     </div>
-
-                    <div class="p-4 bg-brand-dark rounded-2xl border border-brand-cardBorder flex flex-col justify-center">
-                        <i data-lucide="arrow-right-left" class="w-8 h-8 text-brand-red mx-auto mb-2"></i>
-                        <h3 class="font-bold text-sm text-white">RUTA 9</h3>
-                        <p class="text-xs text-gray-400 mt-1">Puntos Intermedios: Villamontes y Camiri</p>
-                    </div>
-
-                    <div class="p-4 bg-brand-dark rounded-2xl border border-brand-cardBorder">
-                        <i data-lucide="map-pin" class="w-8 h-8 text-brand-red mx-auto mb-2"></i>
-                        <h3 class="font-black text-lg text-white">SANTA CRUZ</h3>
-                        <p class="text-xs text-gray-400 mt-1">Destino / Entregas Directas & Depósitos</p>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Ruta Principal: Yacuiba ⇄ Santa Cruz de la Sierra</h3>
+                        <p class="text-xs text-gray-400">Vía Ruta Nacional 9 | ~580 km | 8-10 horas de tránsito</p>
                     </div>
                 </div>
+
+                <!-- Timeline de la ruta -->
+                <div class="relative pl-8 border-l-2 border-brand-cardBorder">
+                    
+                    <!-- YACUIBA - ORIGEN -->
+                    <div class="relative mb-8 group">
+                        <div class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-brand-red border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform"></div>
+                        <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-red/50 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-brand-red/15 border border-brand-red/30 flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-7 h-7 text-brand-red"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider px-2 py-1 rounded bg-brand-red/10">ORIGEN - CASA MATRIZ</span>
+                                        <span class="text-xs text-gray-500 px-2 py-1 rounded bg-brand-dark">YACUIBA</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Oficinas Centrales y Operaciones</h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-red font-semibold">🕐 06:00 / 14:00</p>
+                                            <p class="text-gray-400">Salidas Diarias</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-blue font-semibold">🚌 Retiro Urbano</p>
+                                            <p class="text-gray-400">Camión Propio</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-red font-semibold">📦 Recepción 24h</p>
+                                            <p class="text-gray-400">Encomiendas</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-green-500 font-semibold">📍 GPS Activo</p>
+                                            <p class="text-gray-400">Monitoreo</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Zona la Rotonda, Av. Los Libertadores km 0, Frente al surtidor Copacabana | Tel: +591 77893571</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VILLAMONTES - PARADA INTERMEDIA -->
+                    <div class="relative mb-8 group">
+                        <div class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-brand-blue border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform"></div>
+                        <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-blue/50 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-7 h-7 text-brand-blue"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-xs font-bold text-brand-blue uppercase tracking-wider px-2 py-1 rounded bg-brand-blue/10">PARADA INTERMEDIA</span>
+                                        <span class="text-xs text-gray-500 px-2 py-1 rounded bg-brand-dark">VILLAMONTES</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Punto de Paso y Entregas</h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-blue font-semibold">🕐 ~09:30 / 17:30</p>
+                                            <p class="text-gray-400">Paso Estimado</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-red font-semibold">📦 Entrega/Recolección</p>
+                                            <p class="text-gray-400">En Ruta</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-yellow-500 font-semibold">🏪 Oficina Local</p>
+                                            <p class="text-gray-400">Av. Montenegro esq. Mayor Gomez</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-green-500 font-semibold">📞 WhatsApp</p>
+                                            <p class="text-gray-400">69354192</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Punto estratégico para carga con destino u origen en la zona petrolera y agrícola | Tel: 69354192</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CAMIRI - PARADA INTERMEDIA -->
+                    <div class="relative mb-8 group">
+                        <div class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-yellow-500 border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform"></div>
+                        <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-yellow-500/50 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-7 h-7 text-yellow-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-xs font-bold text-yellow-500 uppercase tracking-wider px-2 py-1 rounded bg-yellow-500/10">PARADA INTERMEDIA</span>
+                                        <span class="text-xs text-gray-500 px-2 py-1 rounded bg-brand-dark">CAMIRI</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Punto de Paso y Coordinación</h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-yellow-500 font-semibold">🕐 ~11:30 / 19:30</p>
+                                            <p class="text-gray-400">Paso Estimado</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-red font-semibold">📦 Entrega/Recolección</p>
+                                            <p class="text-gray-400">En Ruta</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-blue font-semibold">🔄 Conexión Local</p>
+                                            <p class="text-gray-400">Trasbordos zona</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-green-500 font-semibold">⛽ Abastecimiento</p>
+                                            <p class="text-gray-400">Punto logístico</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Ciudad intermedia clave para distribución hacia comunidades del Chaco y Valle | Coordinación en ruta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SANTA CRUZ - DESTINO -->
+                    <div class="relative group">
+                        <div class="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-brand-red border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform"></div>
+                        <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 hover:border-brand-red/50 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-brand-red/15 border border-brand-red/30 flex items-center justify-center">
+                                    <i data-lucide="flag" class="w-7 h-7 text-brand-red"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-xs font-bold text-brand-red uppercase tracking-wider px-2 py-1 rounded bg-brand-red/10">DESTINO FINAL</span>
+                                        <span class="text-xs text-gray-500 px-2 py-1 rounded bg-brand-dark">SANTA CRUZ</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Sucursal, Depósitos y Distribución Urbana</h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-red font-semibold">🕐 ~14:00 / 22:00</p>
+                                            <p class="text-gray-400">Llegada Estimada</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-brand-blue font-semibold">🚌 Entrega Domicilio</p>
+                                            <p class="text-gray-400">Camión Urbano</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-green-500 font-semibold">🏪 Depósitos Seguros</p>
+                                            <p class="text-gray-400">Av. Brasil pasaje Bolivia</p>
+                                        </div>
+                                        <div class="bg-brand-dark p-3 rounded-xl border border-brand-cardBorder">
+                                            <p class="text-green-500 font-semibold">📞 WhatsApp</p>
+                                            <p class="text-gray-400">78415894 / 70975728</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Av. Brasil pasaje Bolivia esq. Turuguapá | Depósitos equipados con seguridad 24h | Entrega puerta a puerta en zona urbana | Tel: 78415894 - 70975728</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HORARIOS Y FRECUENCIAS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 text-center hover:border-brand-red/50 transition">
+                    <div class="w-14 h-14 rounded-xl bg-brand-red/15 border border-brand-red/30 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="calendar" class="w-7 h-7 text-brand-red"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">Salidas Diarias</h4>
+                    <p class="text-3xl font-black text-brand-red mb-1">2</p>
+                    <p class="text-xs text-gray-400">Mañana (06:00) y Tarde (14:00)</p>
+                </div>
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 text-center hover:border-brand-blue/50 transition">
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="clock" class="w-7 h-7 text-brand-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">Tiempo de Tránsito</h4>
+                    <p class="text-3xl font-black text-brand-blue mb-1">8-10h</p>
+                    <p class="text-xs text-gray-400">Según condiciones de ruta y clima</p>
+                </div>
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6 text-center hover:border-green-500/50 transition">
+                    <div class="w-14 h-14 rounded-xl bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="truck" class="w-7 h-7 text-green-500"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">Cobertura</h4>
+                    <p class="text-3xl font-black text-green-500 mb-1">100%</p>
+                    <p class="text-xs text-gray-400">Ruta 9 completa + urbano</p>
+                </div>
+            </div>
+
+            <!-- TIPOS DE SERVICIO POR RUTA -->
+            <div class="bg-brand-cardDark/50 border-y border-brand-cardBorder rounded-2xl p-6 sm:p-8">
+                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="list" class="w-5 h-5 text-brand-red"></i> Servicios Disponibles en Esta Ruta
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-brand-dark border border-brand-cardBorder rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-red/20 flex items-center justify-center">
+                                <i data-lucide="package" class="w-5 h-5 text-brand-red"></i>
+                            </div>
+                            <h4 class="font-bold text-white">Encomiendas y Paquetería</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Hasta 50 kg por bulto</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Entrega en sucursal o domicilio</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Seguro opcional disponible</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-red"></i> Tracking por WhatsApp</li>
+                        </ul>
+                    </div>
+                    <div class="bg-brand-dark border border-brand-cardBorder rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-blue/20 flex items-center justify-center">
+                                <i data-lucide="truck" class="w-5 h-5 text-brand-blue"></i>
+                            </div>
+                            <h4 class="font-bold text-white">Carga Pesada y Voluminosa</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Hasta 30 toneladas (camiones)</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Furgones herméticos / Plataformas</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Maquinaria, contenedores, insumos</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-blue"></i> Coordinación logística previa</li>
+                        </ul>
+                    </div>
+                    <div class="bg-brand-dark border border-brand-cardBorder rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                <i data-lucide="home" class="w-5 h-5 text-green-500"></i>
+                            </div>
+                            <h4 class="font-bold text-white">Retiro a Domicilio</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> Yacuiba y Santa Cruz urbano</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> Camión recolector propio</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> Embalaje y palletizado asistido</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> Programación 24-48h</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAPA REFERENCIAL / ENLACE GOOGLE MAPS -->
+            <div class="mt-8 text-center">
+                <a href="https://www.google.com/maps/dir/Yacuiba,+Bolivia/Villamontes,+Bolivia/Camiri,+Bolivia/Santa+Cruz+de+la+Sierra,+Bolivia/@-20.0,-63.0,7z/data=!4m3!4m2!3e0" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-semibold text-sm transition border border-brand-blue/30 shadow-lg shadow-brand-blue/20">
+                    <i data-lucide="map" class="w-5 h-5"></i>
+                    <span>Ver Ruta Completa en Google Maps</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <p class="text-xs text-gray-500 mt-3">Abre la ruta optimizada Yacuiba → Villamontes → Camiri → Santa Cruz con tiempos de viaje actualizados</p>
             </div>
         </section>
 
@@ -547,45 +886,198 @@
             <div class="text-center max-w-3xl mx-auto mb-10">
                 <span class="text-xs font-bold text-brand-red uppercase tracking-widest">Oficinas y Teléfonos</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Nuestras Sucursales</h2>
-                <p class="text-xs sm:text-sm text-gray-400 mt-2">Visítanos o ponte en contacto telefónico directo.</p>
+                <p class="text-xs sm:text-sm text-gray-400 mt-2">Visítanos, ubícanos en el mapa o contáctanos directo por WhatsApp.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Sucursal Yacuiba -->
-                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6">
-                    <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <i data-lucide="building" class="w-5 h-5 text-brand-red"></i> Yacuiba
-                    </h3>
-                    <div class="space-y-2 text-xs text-gray-300">
-                        <p><strong class="text-white">Dirección:</strong> Zona la Rotonda Av. Los Libertadores km 0 Frente al surtidor Copacabana.</p>
-                        <p><strong class="text-white">Teléfono:</strong> +591 77893571</p>
-                        <p><strong class="text-white">Horario:</strong> Lun - Sáb: 07:00 - 19:30</p>
+            <div class="space-y-8 max-w-5xl mx-auto">
+                
+                <!-- SUCURSAL 1: YACUIBA -->
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-3xl overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        <!-- Galería de fotos -->
+                        <div class="relative h-full min-h-[300px] lg:min-h-[400px]">
+                            <div class="absolute inset-0" id="gallery-yacuiba">
+                                <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80" alt="Sucursal Yacuiba - Fachada" class="w-full h-full object-cover" data-index="0">
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Sucursal Yacuiba - Interior" class="w-full h-full object-cover hidden" data-index="1">
+                                <img src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=800&q=80" alt="Sucursal Yacuiba - Camiones" class="w-full h-full object-cover hidden" data-index="2">
+                            </div>
+                            <!-- Controles galería -->
+                            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="gallery-controls-yacuiba">
+                                <button onclick="changeGalleryImage('yacuiba', 0)" class="w-2 h-2 rounded-full bg-white/80 hover:bg-white transition" aria-label="Foto 1"></button>
+                                <button onclick="changeGalleryImage('yacuiba', 1)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 2"></button>
+                                <button onclick="changeGalleryImage('yacuiba', 2)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 3"></button>
+                            </div>
+                            <span class="absolute top-4 left-4 bg-brand-red/90 text-white text-xs font-bold px-3 py-1 rounded-full">YACUIBA</span>
+                        </div>
+
+                        <!-- Info + Mapa + WhatsApp -->
+                        <div class="p-6 sm:p-8 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <i data-lucide="building" class="w-5 h-5 text-brand-red"></i> Yacuiba (Casa Matriz)
+                                </h3>
+                                <div class="space-y-4 text-sm text-gray-300">
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-brand-red flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Dirección</p>
+                                            <p class="text-xs text-gray-400">Zona la Rotonda, Av. Los Libertadores km 0, Frente al surtidor Copacabana</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="clock" class="w-5 h-5 text-brand-blue flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Horario</p>
+                                            <p class="text-xs text-gray-400">Lunes a Sábado: 07:00 - 19:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 pt-6 border-t border-brand-cardBorder">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Zona+la+Rotonda+Av.+Los+Libertadores+km+0+Yacuiba+Bolivia" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-semibold text-sm transition border border-brand-blue/30">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                    <span>Ver en Google Maps</span>
+                                </a>
+                                <a href="https://wa.me/59177893571?text=Hola%20Transportadora%20San%20Jorge%20Yacuiba,%20necesito%20información" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition border border-green-500/30">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                    <span>WhatsApp: +591 77893571</span>
+                                </a>
+                                <a href="tel:+59177893571" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-cardBorder hover:bg-brand-cardBorder/80 text-white font-semibold text-sm transition border border-brand-cardBorder">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                    <span>Llamar: +591 77893571</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Sucursal Santa Cruz -->
-                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6">
-                    <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <i data-lucide="building" class="w-5 h-5 text-brand-red"></i> Santa Cruz
-                    </h3>
-                    <div class="space-y-2 text-xs text-gray-300">
-                        <p><strong class="text-white">Dirección:</strong> Av. Brasil pasaje Bolivia esq. Turuguapá</p>
-                        <p><strong class="text-white">Celular:</strong> 78415894 - 70975728</p>
-                        <p><strong class="text-white">Horario:</strong> Lun - Sáb: 07:30 - 19:00</p>
+                <!-- SUCURSAL 2: VILLAMONTES -->
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-3xl overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        <!-- Galería de fotos -->
+                        <div class="relative h-full min-h-[300px] lg:min-h-[400px]">
+                            <div class="absolute inset-0" id="gallery-villamontes">
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Sucursal Villamontes - Fachada" class="w-full h-full object-cover" data-index="0">
+                                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Sucursal Villamontes - Interior" class="w-full h-full object-cover hidden" data-index="1">
+                                <img src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=800&q=80" alt="Sucursal Villamontes - Operaciones" class="w-full h-full object-cover hidden" data-index="2">
+                            </div>
+                            <!-- Controles galería -->
+                            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="gallery-controls-villamontes">
+                                <button onclick="changeGalleryImage('villamontes', 0)" class="w-2 h-2 rounded-full bg-white/80 hover:bg-white transition" aria-label="Foto 1"></button>
+                                <button onclick="changeGalleryImage('villamontes', 1)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 2"></button>
+                                <button onclick="changeGalleryImage('villamontes', 2)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 3"></button>
+                            </div>
+                            <span class="absolute top-4 left-4 bg-brand-blue/90 text-white text-xs font-bold px-3 py-1 rounded-full">VILLAMONTES</span>
+                        </div>
+
+                        <!-- Info + Mapa + WhatsApp -->
+                        <div class="p-6 sm:p-8 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <i data-lucide="building" class="w-5 h-5 text-brand-blue"></i> Villamontes
+                                </h3>
+                                <div class="space-y-4 text-sm text-gray-300">
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-brand-red flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Dirección</p>
+                                            <p class="text-xs text-gray-400">Av. Montenegro esq. Mayor Gomez</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="clock" class="w-5 h-5 text-brand-blue flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Horario</p>
+                                            <p class="text-xs text-gray-400">Lunes a Sábado: 07:00 - 19:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 pt-6 border-t border-brand-cardBorder">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Av.+Montenegro+esq.+Mayor+Gomez+Villamontes+Bolivia" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-semibold text-sm transition border border-brand-blue/30">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                    <span>Ver en Google Maps</span>
+                                </a>
+                                <a href="https://wa.me/59169354192?text=Hola%20Transportadora%20San%20Jorge%20Villamontes,%20necesito%20información" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition border border-green-500/30">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                    <span>WhatsApp: 69354192</span>
+                                </a>
+                                <a href="tel:+59169354192" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-cardBorder hover:bg-brand-cardBorder/80 text-white font-semibold text-sm transition border border-brand-cardBorder">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                    <span>Llamar: 69354192</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Sucursal Villa Montes -->
-                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-2xl p-6">
-                    <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <i data-lucide="building" class="w-5 h-5 text-brand-red"></i> Villa Montes
-                    </h3>
-                    <div class="space-y-2 text-xs text-gray-300">
-                        <p><strong class="text-white">Dirección:</strong> Av. Montenegro esq. Mayor Gomez</p>
-                        <p><strong class="text-white">Celular:</strong> 69354192</p>
-                        <p><strong class="text-white">Horario:</strong> Lun - Sáb: 07:00 - 19:00</p>
+                <!-- SUCURSAL 3: SANTA CRUZ -->
+                <div class="bg-brand-cardDark border border-brand-cardBorder rounded-3xl overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        <!-- Galería de fotos -->
+                        <div class="relative h-full min-h-[300px] lg:min-h-[400px]">
+                            <div class="absolute inset-0" id="gallery-santacruz">
+                                <img src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=800&q=80" alt="Sucursal Santa Cruz - Fachada" class="w-full h-full object-cover" data-index="0">
+                                <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80" alt="Sucursal Santa Cruz - Depósito" class="w-full h-full object-cover hidden" data-index="1">
+                                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Sucursal Santa Cruz - Oficina" class="w-full h-full object-cover hidden" data-index="2">
+                            </div>
+                            <!-- Controles galería -->
+                            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="gallery-controls-santacruz">
+                                <button onclick="changeGalleryImage('santacruz', 0)" class="w-2 h-2 rounded-full bg-white/80 hover:bg-white transition" aria-label="Foto 1"></button>
+                                <button onclick="changeGalleryImage('santacruz', 1)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 2"></button>
+                                <button onclick="changeGalleryImage('santacruz', 2)" class="w-2 h-2 rounded-full bg-white/40 hover:bg-white/60 transition" aria-label="Foto 3"></button>
+                            </div>
+                            <span class="absolute top-4 left-4 bg-brand-red/90 text-white text-xs font-bold px-3 py-1 rounded-full">SANTA CRUZ</span>
+                        </div>
+
+                        <!-- Info + Mapa + WhatsApp -->
+                        <div class="p-6 sm:p-8 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                    <i data-lucide="building" class="w-5 h-5 text-brand-red"></i> Santa Cruz de la Sierra
+                                </h3>
+                                <div class="space-y-4 text-sm text-gray-300">
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-brand-red flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Dirección</p>
+                                            <p class="text-xs text-gray-400">Av. Brasil pasaje Bolivia esq. Turuguapá</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-brand-dark rounded-xl border border-brand-cardBorder">
+                                        <i data-lucide="clock" class="w-5 h-5 text-brand-blue flex-shrink-0"></i>
+                                        <div>
+                                            <p class="font-semibold text-white">Horario</p>
+                                            <p class="text-xs text-gray-400">Lunes a Sábado: 07:30 - 19:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 pt-6 border-t border-brand-cardBorder">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Av.+Brasil+pasaje+Bolivia+esq.+Turuguap%C3%A1+Santa+Cruz+Bolivia" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-semibold text-sm transition border border-brand-blue/30">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                    <span>Ver en Google Maps</span>
+                                </a>
+                                <a href="https://wa.me/59178415894?text=Hola%20Transportadora%20San%20Jorge%20Santa%20Cruz,%20necesito%20información" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition border border-green-500/30">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                    <span>WhatsApp: 78415894</span>
+                                </a>
+                                <a href="https://wa.me/59170975728?text=Hola%20Transportadora%20San%20Jorge%20Santa%20Cruz,%20necesito%20información" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition border border-green-500/30">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                    <span>WhatsApp: 70975728</span>
+                                </a>
+                                <a href="tel:+59178415894" class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-cardBorder hover:bg-brand-cardBorder/80 text-white font-semibold text-sm transition border border-brand-cardBorder">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                    <span>Llamar: 78415894 / 70975728</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -595,31 +1087,22 @@
     <div id="mobileMoreMenu" class="fixed inset-0 bg-brand-dark/95 z-50 hidden flex flex-col justify-end pb-20 px-6">
         <div class="bg-brand-cardDark border border-brand-cardBorder rounded-3xl p-6 space-y-3">
             <div class="flex items-center justify-between pb-3 border-b border-brand-cardBorder">
-                <span class="font-bold text-white text-sm uppercase tracking-wider">Menú Principal</span>
+                <span class="font-bold text-white text-sm uppercase tracking-wider">Más Opciones</span>
                 <button onclick="toggleMobileMore()" class="p-2 text-gray-400 hover:text-white">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
-            <button onclick="showSection('inicio'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="home" class="w-4 h-4 text-brand-red"></i> Inicio
-            </button>
-            <button onclick="showSection('historia'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="book-open" class="w-4 h-4 text-brand-red"></i> Nuestra Historia
-            </button>
             <button onclick="showSection('elegirnos'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="shield-check" class="w-4 h-4 text-brand-red"></i> ¿Por Qué Elegirnos?
+                <i data-lucide="shield-check" class="w-4 h-4 text-brand-blue"></i> Por Qué Elegirnos
             </button>
             <button onclick="showSection('camiones'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
                 <i data-lucide="truck" class="w-4 h-4 text-brand-red"></i> Nuestros Camiones
             </button>
             <button onclick="showSection('rutas'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="map-pin" class="w-4 h-4 text-brand-red"></i> Rutas Diarias
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-blue"></i> Rutas Diarias
             </button>
-            <button onclick="showSection('retiros'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="package-check" class="w-4 h-4 text-brand-red"></i> Retiro de Encomienda
-            </button>
-            <button onclick="showSection('contacto'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
-                <i data-lucide="phone" class="w-4 h-4 text-brand-red"></i> Contacto y Sucursales
+            <button onclick="showSection('historia'); toggleMobileMore();" class="w-full text-left py-2.5 text-sm text-gray-200 hover:text-brand-red flex items-center gap-3">
+                <i data-lucide="book-open" class="w-4 h-4 text-brand-red"></i> Nuestra Historia
             </button>
         </div>
     </div>
@@ -638,9 +1121,9 @@
                 <span class="text-[10px]">Retiro</span>
             </button>
 
-            <button onclick="showSection('camiones')" class="mobile-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400" data-sec="camiones">
-                <i data-lucide="truck" class="w-5 h-5 mb-0.5"></i>
-                <span class="text-[10px] font-medium">Camiones</span>
+            <button onclick="showSection('historia')" class="mobile-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400" data-sec="nosotros">
+                <i data-lucide="building" class="w-5 h-5 mb-0.5"></i>
+                <span class="text-[10px] font-medium">Nosotros</span>
             </button>
 
             <button onclick="showSection('contacto')" class="mobile-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400" data-sec="contacto">
@@ -721,6 +1204,67 @@
             const menu = document.getElementById('mobileMoreMenu');
             menu.classList.toggle('hidden');
         }
+
+        // NOSOTROS DROPDOWN FUNCTIONS
+        function toggleNosotrosDropdown() {
+            const menu = document.getElementById('nosotrosMenu');
+            const arrow = document.getElementById('nosotrosArrow');
+            const isOpen = menu.classList.contains('opacity-100');
+            
+            if (isOpen) {
+                closeNosotrosDropdown();
+            } else {
+                menu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+                menu.classList.add('opacity-100', 'visible', 'translate-y-0');
+                arrow.classList.add('rotate-180');
+            }
+        }
+
+        function closeNosotrosDropdown() {
+            const menu = document.getElementById('nosotrosMenu');
+            const arrow = document.getElementById('nosotrosArrow');
+            menu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+            menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            arrow.classList.remove('rotate-180');
+        }
+
+        // GALERÍA DE FOTOS SUCURSALES
+        function changeGalleryImage(branch, index) {
+            const gallery = document.getElementById(`gallery-${branch}`);
+            const controls = document.getElementById(`gallery-controls-${branch}`);
+            
+            if (gallery && controls) {
+                const images = gallery.querySelectorAll('img');
+                const dots = controls.querySelectorAll('button');
+                
+                images.forEach((img, i) => {
+                    if (i === index) {
+                        img.classList.remove('hidden');
+                    } else {
+                        img.classList.add('hidden');
+                    }
+                });
+                
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-white/40', 'hover:bg-white/60');
+                        dot.classList.add('bg-white/80', 'hover:bg-white');
+                    } else {
+                        dot.classList.remove('bg-white/80', 'hover:bg-white');
+                        dot.classList.add('bg-white/40', 'hover:bg-white/60');
+                    }
+                });
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('nosotrosDropdown');
+            const menu = document.getElementById('nosotrosMenu');
+            if (dropdown && !dropdown.contains(e.target)) {
+                closeNosotrosDropdown();
+            }
+        });
 
         // MANEJO DEL FORMULARIO DE RETIRO Y ENVÍO AUTOMÁTICO A WHATSAPP
         document.getElementById('formRetiro').addEventListener('submit', function(e) {
